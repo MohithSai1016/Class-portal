@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+
+content="width=device-width, initial-scale=1">
+
+<title>HOD Login</title>
+
+<link rel="stylesheet"
+
+href="../../assets/css/style.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h2>HOD / Admin Login</h2>
+
+<form id="adminLogin">
+
+<input
+
+type="text"
+
+placeholder="Username"
+
+required>
+
+<input
+
+type="password"
+
+placeholder="Password"
+
+required>
+
+<button>
+
+Login
+
+</button>
+
+</form>
+
+<a href="../../index.html">
+
+← Back
+
+</a>
+
+</div>
+
+<script src="../../assets/js/app.js"></script>
+
+</body>
+<body>
+
+<div id="header"></div>
+
+<div id="sidebar"></div>
+
+<div class="main">
+
+<h1>Admin Dashboard</h1>
+
+<div class="cards">
+
+<!-- Existing cards remain here -->
+
+</div>
+
+</div>
+
+<div id="footer"></div>
+
+<script src="../../assets/js/auth.js"></script>
+
+<script src="../../assets/js/componentLoader.js"></script>
+
+<script>
+
+initializeComponents("admin");
+
+</script>
+
+</body>
+
+</html>
+<form id="adminLogin">
+
+<input
+id="username"
+type="text"
+placeholder="Admin Username"
+required>
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+required>
+
+<button>
+
+Admin Login
+
+</button>
+
+</form>
+
+<p id="message"></p>
+<script src="../../assets/js/auth.js"></script>
+
+<script>
+
+if(!isLoggedIn()){
+
+location.href="../login/admin-login.html";
+
+}
+<a href="#"
+onclick="logout()">
+🚪 Logout
+</a>

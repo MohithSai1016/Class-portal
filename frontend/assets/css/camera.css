@@ -1,0 +1,21 @@
+video{
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+#progress{
+
+margin-top:20px;
+
+color:#2563eb;
+
+}
+
+canvas{
+
+display:none;
+
+}

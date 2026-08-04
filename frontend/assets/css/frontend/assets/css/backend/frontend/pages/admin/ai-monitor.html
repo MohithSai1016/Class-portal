@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>AI Monitor</title>
+
+<link rel="stylesheet"
+href="../../assets/css/dashboard.css">
+
+</head>
+
+<body>
+
+<h1>AI System Monitor</h1>
+
+<div id="status"></div>
+
+<script>
+
+fetch("http://localhost:5000/api/analytics/health")
+
+.then(r=>r.json())
+
+.then(data=>{
+
+document.getElementById("status").innerHTML=`
+
+<h2>AI : ${data.ai}</h2>
+
+<h2>Camera : ${data.camera}</h2>
+
+<h2>Recognition : ${data.recognition}</h2>
+
+`;
+
+});
+
+</script>
+
+</body>
+
+</html>

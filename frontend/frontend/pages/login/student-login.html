@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Student Login</title>
+
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h2>Student Login</h2>
+
+<form id="studentLogin">
+
+<input type="text"
+
+placeholder="Student ID"
+
+required>
+
+<input type="password"
+
+placeholder="Password"
+
+required>
+
+<button type="submit">
+
+Login
+
+</button>
+
+</form>
+
+<a href="../../index.html">
+
+← Back to Home
+
+</a>
+
+</div>
+
+<script src="../../assets/js/app.js"></script>
+
+</body>
+
+</html>
+<form id="studentLogin">
+
+<input
+id="username"
+type="text"
+placeholder="Student Username"
+required>
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+required>
+
+<button type="submit">
+
+Student Login
+
+</button>
+
+</form>
+
+<p id="message"></p>
+<script src="../../assets/js/auth.js"></script>
+
+<script>
+
+if(!isLoggedIn()){
+
+location.href="../login/student-login.html";
+
+}
+
+</script>
+<a href="#"
+onclick="logout()">
+🚪 Logout
+</a>
+<body>
+
+<div id="header"></div>
+
+<div id="sidebar"></div>
+
+<div class="main">
+
+<h1>Student Dashboard</h1>
+
+<div class="cards">
+
+<!-- Cards will remain here -->
+
+</div>
+
+</div>
+
+<div id="footer"></div>
+
+<script src="../../assets/js/auth.js"></script>
+
+<script src="../../assets/js/componentLoader.js"></script>
+
+<script>
+
+initializeComponents("student");
+
+</script>
+
+</body>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Capture Face</title>
+
+<link rel="stylesheet"
+href="../../assets/css/style.css">
+
+<link rel="stylesheet"
+href="../../assets/css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<h1>AI Face Registration</h1>
+
+<input
+id="studentId"
+type="text"
+placeholder="Student Roll Number">
+
+<br><br>
+
+<video
+id="video"
+width="640"
+height="480"
+autoplay>
+</video>
+
+<canvas
+id="canvas"
+width="640"
+height="480"
+style="display:none;">
+</canvas>
+
+<br><br>
+
+<button
+class="btn"
+onclick="startCapture()">
+
+Start Registration
+
+</button>
+
+<h2 id="progress">
+
+Waiting...
+
+</h2>
+
+</div>
+
+<script src="../../assets/js/captureFace.js"></script>
+
+</body>
+
+</html>

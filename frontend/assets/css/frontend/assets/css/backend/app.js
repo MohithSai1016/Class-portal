@@ -59,3 +59,10 @@ app.use(
 "/api/marks-entry",
 require("./routes/marksEntryRoutes")
 );
+app.use(
+
+"/api/results",
+
+require("./routes/resultRoutes")
+
+);

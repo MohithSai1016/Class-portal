@@ -1,7 +1,6 @@
 const repository =
 require("../models/TimetableRepository");
 
-...
 
 const timetable =
 scheduler.schedule(

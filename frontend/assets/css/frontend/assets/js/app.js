@@ -87,3 +87,7 @@ login(
 "adminLogin",
 "../admin/dashboard.html"
 );
+app.use(
+    "/api/timetable-portal",
+    require("./routes/timetablePortalRoutes")
+);

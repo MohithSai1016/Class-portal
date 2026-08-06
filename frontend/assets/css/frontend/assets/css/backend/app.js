@@ -51,3 +51,11 @@ app.use(
 require("./routes/aiSchedulerRoutes")
 
 );
+app.use(
+    "/api/gradebook",
+    require("./routes/gradebookRoutes")
+);
+app.use(
+"/api/marks-entry",
+require("./routes/marksEntryRoutes")
+);

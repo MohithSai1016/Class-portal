@@ -12,3 +12,10 @@ app.use(
 require("./routes/feeRoutes")
 
 );
+app.use(
+
+"/api/payments",
+
+require("./routes/paymentRoutes")
+
+);

@@ -5,3 +5,10 @@ app.use(
 require("./routes/timetableSearchRoutes")
 
 );
+app.use(
+
+"/api/fees",
+
+require("./routes/feeRoutes")
+
+);

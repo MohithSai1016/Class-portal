@@ -1,0 +1,15 @@
+Package 7 - Part 3
+
+Add this route to backend/app.js:
+
+app.use(
+    "/api/payment-gateway",
+    require("./routes/paymentGatewayRoutes")
+);
+
+Important:
+- Do not put gateway secret keys in frontend JavaScript.
+- Copy .env.example to .env and set PAYMENT_WEBHOOK_SECRET.
+- The webhook route uses raw JSON so the signature can be verified.
+- Package 7 Part 4 will persist verified webhook events, update student_fees,
+  and generate payment receipts.

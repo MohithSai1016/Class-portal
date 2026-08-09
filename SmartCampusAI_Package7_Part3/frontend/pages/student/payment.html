@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus AI - Fee Payment</title>
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <main>
+        <h1>Fee Payment</h1>
+
+        <label for="feeId">Student Fee ID</label>
+        <input id="feeId" type="number" min="1">
+
+        <label for="amount">Amount (INR)</label>
+        <input id="amount" type="number" min="1" step="0.01">
+
+        <button id="createOrder">Create Payment Order</button>
+
+        <pre id="result"></pre>
+    </main>
+
+    <script src="../../assets/js/payment.js"></script>
+</body>
+</html>

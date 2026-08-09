@@ -1,0 +1,28 @@
+Package 7 - Part 4
+
+1. Run the new SQL from database/schema.sql.
+2. Register the receipt route in backend/app.js:
+
+app.use(
+    "/api/receipts",
+    require("./routes/receiptRoutes")
+);
+
+3. Package 7 Part 3 already provides the payment webhook route.
+4. The webhook now verifies the signature, checks the payment amount,
+   records the transaction, updates the fee ledger, and creates a receipt.
+5. The payment gateway payload expected by this prototype is:
+
+{
+  "type": "payment.success",
+  "data": {
+    "orderId": "gateway-order-id",
+    "paymentId": "gateway-payment-id",
+    "amount": 1000,
+    "method": "UPI"
+  }
+}
+
+Do not use this prototype payload as a substitute for the official
+gateway webhook schema. When a real gateway is selected, adapt the
+gateway adapter to its official signed webhook format.

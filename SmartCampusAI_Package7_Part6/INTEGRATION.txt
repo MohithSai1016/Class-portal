@@ -1,0 +1,27 @@
+Package 7 - Part 6
+
+Run database/schema.sql.
+
+Add to backend/app.js:
+
+app.use(
+    "/api/fee-reminders",
+    require("./routes/feeReminderRoutes")
+);
+
+app.use(
+    "/api/finance",
+    require("./routes/financeAnalyticsRoutes")
+);
+
+This part adds:
+- Admin finance dashboard
+- Total assigned, collected and due
+- Paid/partial/pending counts
+- Monthly collection summary
+- Overdue fee list
+- In-app fee reminder generation
+
+Production note:
+The reminder generator currently creates in-app notifications.
+Email/SMS provider adapters should be added separately.

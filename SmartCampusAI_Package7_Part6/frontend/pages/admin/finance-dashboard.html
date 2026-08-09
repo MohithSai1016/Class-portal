@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Campus AI - Finance Dashboard</title>
+<link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+<main>
+<h1>Finance Dashboard</h1>
+<section id="summary"></section>
+
+<h2>Monthly Collections</h2>
+<table>
+<thead><tr><th>Month</th><th>Collected</th></tr></thead>
+<tbody id="collections"></tbody>
+</table>
+
+<h2>Overdue Fees</h2>
+<table>
+<thead><tr><th>Student ID</th><th>Due Date</th><th>Outstanding</th></tr></thead>
+<tbody id="overdue"></tbody>
+</table>
+
+<button id="generateReminders">Generate Fee Reminders</button>
+<p id="message"></p>
+</main>
+<script src="../../assets/js/finance-dashboard.js"></script>
+</body>
+</html>

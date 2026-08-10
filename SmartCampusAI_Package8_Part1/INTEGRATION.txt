@@ -1,0 +1,21 @@
+PACKAGE 8 - PART 1
+
+Run database/schema.sql.
+
+Add to backend/app.js:
+
+app.use("/api/notifications",require("./routes/notificationRoutes"));
+
+Adds:
+- User-specific notifications
+- Read/unread status
+- Unread count
+- Mark one/all as read
+- Admin-created notifications
+- Shared student/faculty notification page
+
+The service is provider-neutral. Email, SMS, push notifications and
+announcements will be added in later Package 8 parts.
+
+The existing auth middleware must expose the authenticated numeric user
+ID as req.user.id.

@@ -1,0 +1,24 @@
+PACKAGE 8 - PART 2
+
+The announcements table was created in Package 8 Part 1.
+
+Add to backend/app.js:
+
+app.use(
+    "/api/announcements",
+    require("./routes/announcementRoutes")
+);
+
+Adds:
+- Announcement creation
+- Audience selection
+- Priority
+- Expiry date
+- Published/archived status
+- Student/faculty announcement page
+- Admin announcement manager
+
+IMPORTANT:
+This part stores announcements but does not yet fan them out into
+individual notification rows. Package 8 Part 3 will add recipient
+resolution and automatic notification creation.

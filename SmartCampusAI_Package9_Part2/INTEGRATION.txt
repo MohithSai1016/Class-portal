@@ -1,0 +1,60 @@
+PACKAGE 9 - PART 2
+
+This part adds secure PDF certificate file handling.
+
+Add to backend/app.js:
+
+const path = require("path");
+
+app.use(
+    "/storage/certificates",
+    express.static(
+        path.join(__dirname, "../storage/certificates")
+    )
+);
+
+app.use(
+    "/api/certificate-files",
+    require("./routes/certificateFileRoutes")
+);
+
+app.use(
+    "/api/certificates",
+    require("./routes/certificateDownloadRoutes")
+);
+
+IMPORTANT:
+The download route is authenticated and checks student ownership.
+Do not rely on the static storage URL for protected certificate access.
+The static route is provided for compatibility with existing
+certificate file_path values; for production, move certificate files
+outside a public static directory and serve them only through the
+authenticated download controller.
+
+Upload endpoint:
+
+POST /api/certificate-files/:id/file
+
+Form field:
+certificate = PDF file
+
+Maximum file size:
+5 MB
+
+Allowed:
+PDF only
+
+Delete endpoint:
+
+DELETE /api/certificate-files/:id/file
+
+Download endpoint:
+
+GET /api/certificates/:id/download
+
+Students can download only their own certificates.
+Faculty/admin can access certificates according to the authenticated
+certificate API permissions.
+
+This part stores only generated server-side filenames and rejects
+non-PDF files. Original filenames are never used as stored filenames.

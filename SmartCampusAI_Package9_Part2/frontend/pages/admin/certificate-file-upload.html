@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+<title>Smart Campus AI - Upload Certificate</title>
+</head>
+<body>
+<main>
+<h1>Upload Certificate PDF</h1>
+
+<form id="uploadForm">
+    <label>
+        Certificate ID
+        <input id="certificateId"
+               type="number"
+               min="1"
+               required>
+    </label>
+
+    <br><br>
+
+    <label>
+        PDF Certificate
+        <input id="certificate"
+               type="file"
+               accept="application/pdf,.pdf"
+               required>
+    </label>
+
+    <br><br>
+
+    <button type="submit">
+        Upload Certificate
+    </button>
+</form>
+
+<p id="status"></p>
+</main>
+
+<script src="../../assets/js/certificate-file-upload.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Campus AI - Notification Templates</title>
+<link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+<main>
+<h1>Notification Templates</h1>
+
+<form id="templateForm">
+<input id="templateKey"
+       placeholder="attendance_warning"
+       required>
+
+<input id="titleTemplate"
+       placeholder="Attendance Alert for {{studentName}}"
+       required>
+
+<textarea id="messageTemplate"
+ placeholder="Your attendance is {{percentage}}%."
+ required></textarea>
+
+<select id="type">
+<option>General</option>
+<option>Attendance</option>
+<option>Fees</option>
+<option>Academic</option>
+<option>Placement</option>
+<option>System</option>
+<option>Announcement</option>
+</select>
+
+<select id="priority">
+<option>Low</option>
+<option selected>Normal</option>
+<option>High</option>
+<option>Urgent</option>
+</select>
+
+<button type="submit">Create Template</button>
+</form>
+
+<p id="status"></p>
+<section id="templates"></section>
+</main>
+
+<script src="../../assets/js/notification-templates.js"></script>
+</body>
+</html>

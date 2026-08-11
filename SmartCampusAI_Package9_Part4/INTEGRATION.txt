@@ -1,0 +1,77 @@
+PACKAGE 9 - PART 4
+
+Add to backend/app.js:
+
+app.use(
+    "/api/certificate-admin",
+    require("./routes/certificateAdminRoutes")
+);
+
+app.use(
+    "/api/bulk-certificates",
+    require("./routes/bulkCertificateRoutes")
+);
+
+Adds:
+- Admin/faculty certificate search
+- Certificate status filtering
+- Certificate type filtering
+- Certificate statistics
+- Certificate issuing API
+- Bulk certificate issuing
+- Student certificate dashboard
+- Admin certificate management dashboard
+
+Admin/faculty search:
+
+GET /api/certificate-admin/search
+
+Optional query parameters:
+search
+status
+type
+studentUserId
+
+Statistics:
+
+GET /api/certificate-admin/statistics
+
+Issue one certificate:
+
+POST /api/certificate-admin/issue
+
+Example:
+
+{
+    "studentUserId": 25,
+    "certificateType": "Achievement",
+    "title": "Outstanding Project Award",
+    "description": "Awarded for outstanding project work.",
+    "issuingOrganization": "Smart Campus AI",
+    "issueDate": "2026-08-11"
+}
+
+Bulk issue:
+
+POST /api/bulk-certificates/issue
+
+Example:
+
+{
+    "certificateType": "Participation",
+    "title": "Hackathon Participation Certificate",
+    "description": "Awarded for participation in the campus hackathon.",
+    "issuingOrganization": "Smart Campus AI",
+    "issueDate": "2026-08-11",
+    "students": [
+        { "studentUserId": 21 },
+        { "studentUserId": 22 },
+        { "studentUserId": 23 }
+    ]
+}
+
+The bulk service returns successful and failed student records
+instead of stopping the complete operation after one failure.
+
+Package 9 now contains certificate storage, generation, QR
+verification, student dashboards, administration and bulk issuance.

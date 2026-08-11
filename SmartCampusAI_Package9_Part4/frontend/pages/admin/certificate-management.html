@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+<title>Smart Campus AI - Certificate Management</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+}
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 24px;
+}
+.controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+input, select, button {
+    padding: 9px;
+}
+.card {
+    background: white;
+    padding: 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Certificate Management</h1>
+
+<section class="controls">
+    <input id="search"
+           placeholder="Search certificate">
+
+    <select id="status">
+        <option value="">All Statuses</option>
+        <option value="Issued">Issued</option>
+        <option value="Pending">Pending</option>
+        <option value="Revoked">Revoked</option>
+    </select>
+
+    <input id="type"
+           placeholder="Certificate type">
+
+    <button id="searchButton">
+        Search
+    </button>
+</section>
+
+<section id="statistics">
+    Loading statistics...
+</section>
+
+<section id="results">
+    Loading certificates...
+</section>
+</main>
+
+<script src="../../assets/js/certificate-management.js"></script>
+</body>
+</html>

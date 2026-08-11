@@ -1,0 +1,42 @@
+PACKAGE 9 - PART 3
+
+This part adds certificate generation and QR verification.
+
+Dependencies required in backend package.json:
+
+npm install pdfkit qrcode
+
+Add to backend/app.js:
+
+app.use(
+    "/api/certificate-pdf",
+    require("./routes/certificatePdfRoutes")
+);
+
+app.use(
+    "/api/certificate-qr",
+    require("./routes/certificateQrRoutes")
+);
+
+PDF generation endpoint:
+
+POST /api/certificate-pdf/:id/generate-pdf
+
+QR endpoint:
+
+GET /api/certificate-qr/:id/qr
+
+The generated QR points to the certificate verification page and
+contains the certificate's unique verification code.
+
+Run database/seed_notification.sql after Package 8 notification
+tables are available.
+
+Important:
+The PDF generator uses the certificate record as its source.
+A student name is read from certificate.student_name when that field
+is joined/populated by a later student-profile integration. Until
+then, the generated PDF safely falls back to "Student".
+
+For production, replace the simple HTML/QR presentation with the
+approved institutional certificate design and official branding.

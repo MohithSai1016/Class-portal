@@ -1,0 +1,43 @@
+PACKAGE 9 - PART 1
+
+Run database/schema.sql.
+
+Add to backend/app.js:
+
+app.use(
+    "/api/certificates",
+    require("./routes/certificateRoutes")
+);
+
+This part establishes the Student Certificates module.
+
+Included:
+- Certificate database
+- Certificate creation
+- Student certificate listing
+- Certificate details
+- Certificate revocation
+- Unique verification codes
+- Public certificate verification
+- Student certificate page
+- Public verification page
+- Admin/faculty certificate issuing API
+
+Important:
+The certificate file_path is only a stored reference in this part.
+Actual secure upload/storage and PDF generation will be added in
+later Package 9 parts.
+
+Expected authenticated user fields:
+req.user.id
+req.user.role
+
+Expected roles:
+student
+faculty
+admin
+
+Students can only access their own certificate collection.
+Faculty/admin can issue certificates.
+Admins can revoke certificates.
+Certificate verification does not require authentication.

@@ -1,0 +1,55 @@
+PACKAGE 9 - PART 5
+
+This part adds certificate audit history and stronger verification.
+
+Run database/schema.sql.
+
+Add to backend/app.js:
+
+app.use(
+    "/api/certificate-audit",
+    require("./routes/certificateAuditRoutes")
+);
+
+app.use(
+    "/api/certificate-verification",
+    require("./routes/certificateVerificationRoutes")
+);
+
+app.use(
+    "/api/certificate-lifecycle",
+    require("./routes/certificateLifecycleRoutes")
+);
+
+New functionality:
+
+1. Certificate audit logs
+   - ISSUED
+   - REVOKED
+   - PDF_GENERATED
+   - FILE_UPLOADED
+
+2. Public verification now distinguishes:
+   - Certificate not found
+   - Revoked certificate
+   - Pending certificate
+   - Valid issued certificate
+
+3. Certificate lifecycle service centralizes issuing/revoking
+   and creates audit entries.
+
+4. Admin audit page:
+   frontend/pages/admin/certificate-audit.html
+
+5. Improved public verification page:
+   frontend/pages/shared/verify-certificate-v2.html
+
+Recommended integration:
+Replace direct certificate creation/revocation calls in future modules
+with certificateLifecycleService.issue() and revoke() so every lifecycle
+change is recorded.
+
+Package 9 certificate functionality is now substantially complete:
+database, issuance, storage, PDF generation, QR verification,
+student dashboard, administration, bulk issuing, verification and
+audit history.

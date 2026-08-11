@@ -1,0 +1,30 @@
+PACKAGE 8 - PART 4
+
+Run database/schema.sql.
+
+Add to backend/app.js:
+
+app.use(
+    "/api/notification-preferences",
+    require("./routes/notificationPreferenceRoutes")
+);
+
+Adds:
+- Per-user notification preferences
+- In-app/email/push switches
+- Attendance notification preference
+- Fee notification preference
+- Academic notification preference
+- Placement notification preference
+- Announcement notification preference
+- Delivery logging infrastructure
+- Email provider adapter placeholder
+- Push provider adapter placeholder
+- Notification settings page
+
+IMPORTANT:
+The email and push adapters intentionally do not send anything yet.
+Real provider credentials should be stored in backend environment
+variables and connected in a later deployment/integration part.
+
+The preference API uses req.user.id from the authenticated session.

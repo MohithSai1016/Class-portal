@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Campus AI - Notification Monitor</title>
+<link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+<main>
+<h1>Notification Monitor</h1>
+
+<section>
+    <h2>Statistics</h2>
+    <div id="statistics">Loading...</div>
+</section>
+
+<section>
+    <h2>Search Notifications</h2>
+
+    <select id="type">
+        <option value="">All Types</option>
+        <option value="General">General</option>
+        <option value="Attendance">Attendance</option>
+        <option value="Fees">Fees</option>
+        <option value="Academic">Academic</option>
+        <option value="Placement">Placement</option>
+        <option value="Announcement">Announcement</option>
+        <option value="System">System</option>
+    </select>
+
+    <select id="status">
+        <option value="">All Status</option>
+        <option value="read">Read</option>
+        <option value="unread">Unread</option>
+    </select>
+
+    <button id="search">Search</button>
+
+    <div id="results"></div>
+</section>
+
+<section>
+    <h2>Cleanup</h2>
+    <input id="days" type="number" min="1" value="90">
+    <button id="cleanup">Delete Old Notifications</button>
+    <p id="status"></p>
+</section>
+</main>
+
+<script src="../../assets/js/notification-monitor.js"></script>
+</body>
+</html>

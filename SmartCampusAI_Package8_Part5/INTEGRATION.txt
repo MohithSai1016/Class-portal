@@ -1,0 +1,41 @@
+PACKAGE 8 - PART 5
+
+Add to backend/app.js:
+
+app.use(
+    "/api/notification-scheduler",
+    require("./routes/notificationSchedulerRoutes")
+);
+
+app.use(
+    "/api/automatic-alerts",
+    require("./routes/automaticAlertRoutes")
+);
+
+Start the scheduler once after the Express app is initialized:
+
+const notificationScheduler =
+    require("./services/notificationSchedulerService");
+
+notificationScheduler.start(30000);
+
+The scheduler checks for notifications that have not yet been
+processed and dispatches them according to user preferences.
+
+Automatic alert endpoints:
+
+POST /api/automatic-alerts/attendance
+POST /api/automatic-alerts/fees
+POST /api/automatic-alerts/academic
+POST /api/automatic-alerts/placement
+
+These endpoints are protected by role authorization.
+
+IMPORTANT:
+Do not expose these endpoints directly to untrusted public clients.
+They are intended for internal modules such as attendance, fees,
+academic results and placement modules.
+
+Email and push providers remain adapters from Part 4. If they are not
+configured, the notification remains safely recorded in-app while
+external delivery is reported as failed/skipped by the provider layer.

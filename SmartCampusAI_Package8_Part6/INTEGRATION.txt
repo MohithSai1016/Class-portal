@@ -1,0 +1,34 @@
+PACKAGE 8 - PART 6
+
+Add to backend/app.js:
+
+app.use(
+    "/api/notification-admin",
+    require("./routes/notificationAdminRoutes")
+);
+
+Adds:
+- Notification history search
+- Read/unread filtering
+- Notification type filtering
+- Admin statistics
+- Delivery statistics
+- Notification cleanup
+- Admin monitoring dashboard
+
+Admin API:
+GET  /api/notification-admin/search
+GET  /api/notification-admin/statistics
+POST /api/notification-admin/cleanup
+
+Cleanup requires a JSON body such as:
+{ "days": 90 }
+
+The cleanup operation is restricted to 1-3650 days and requires
+admin authorization.
+
+Database indexes improve notification history and delivery queries.
+
+Important:
+Run the database/schema.sql additions before using the admin
+statistics/search functionality.

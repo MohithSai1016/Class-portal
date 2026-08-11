@@ -1,0 +1,47 @@
+PACKAGE 8 - PART 3
+
+Add to backend/app.js:
+
+app.use(
+    "/api/announcement-delivery",
+    require("./routes/announcementDeliveryRoutes")
+);
+
+Keep the routes from Parts 1 and 2:
+
+app.use(
+    "/api/notifications",
+    require("./routes/notificationRoutes")
+);
+
+app.use(
+    "/api/announcements",
+    require("./routes/announcementRoutes")
+);
+
+Published announcements are now automatically delivered as individual
+notifications to the matching audience.
+
+Manual delivery:
+POST /api/announcement-delivery/:id/deliver
+
+This endpoint is admin-only.
+
+Expected users table:
+users.id
+users.role
+
+Expected roles:
+student
+faculty
+admin
+hod
+
+If the existing project uses different role names, change the mapping
+inside UserDirectoryRepository.js.
+
+The notification badge can be placed on dashboards by loading
+notification-badge.js and adding an element with:
+data-notification-count
+
+It refreshes the unread count every 30 seconds.

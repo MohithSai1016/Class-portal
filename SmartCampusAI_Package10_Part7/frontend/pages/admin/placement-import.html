@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Drive Import</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:700px;
+    margin:auto;
+    padding:24px;
+}
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+}
+button{
+    margin-top:15px;
+    padding:10px 16px;
+}
+code{
+    display:block;
+    padding:12px;
+    background:#eee;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Placement Drive CSV Import</h1>
+
+<section class="card">
+
+<p>
+CSV columns:
+</p>
+
+<code>
+company_name,role_title,package_lpa,application_deadline,drive_status
+</code>
+
+<form id="form">
+<input
+    type="file"
+    id="file"
+    accept=".csv"
+    required>
+
+<br>
+
+<button type="submit">
+Import Drives
+</button>
+</form>
+
+<p id="message"></p>
+
+</section>
+</main>
+
+<script>
+const token=
+    localStorage.getItem("token");
+
+document.getElementById(
+    "form"
+).onsubmit=async event=>{
+    event.preventDefault();
+
+    const file=
+        document.getElementById(
+            "file"
+        ).files[0];
+
+    const body=new FormData();
+    body.append("file",file);
+
+    try{
+        const response=
+            await fetch(
+                "http://localhost:5000/api/placement-import/drives/csv",
+                {
+                    method:"POST",
+                    headers:{
+                        Authorization:
+                            `Bearer ${token}`
+                    },
+                    body
+                }
+            );
+
+        const data=
+            await response.json();
+
+        document.getElementById(
+            "message"
+        ).textContent=
+            data.success
+                ? `Imported ${data.imported}, skipped ${data.skipped}.`
+                : data.message;
+    }catch(error){
+        document.getElementById(
+            "message"
+        ).textContent=
+            error.message;
+    }
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+PACKAGE 10 - PART 5
+
+PLACEMENT NOTIFICATIONS + UNIFIED STUDENT DASHBOARD
+
+1. Run:
+database/schema_part5.sql
+
+2. Add to backend/app.js:
+
+app.use(
+    "/api/placement-notifications",
+    require("./routes/placementNotificationRoutes")
+);
+
+app.use(
+    "/api/placement-dashboard",
+    require("./routes/placementDashboardRoutes")
+);
+
+3. Student notification APIs:
+
+GET /api/placement-notifications/mine
+GET /api/placement-notifications/mine/unread-count
+PATCH /api/placement-notifications/mine/:id/read
+PATCH /api/placement-notifications/mine/read-all
+
+4. HOD/admin notification creation:
+
+POST /api/placement-notifications/admin
+
+Example:
+
+{
+    "studentUserId": 25,
+    "notificationType": "Interview",
+    "title": "Technical Interview Scheduled",
+    "message": "Your technical interview is scheduled tomorrow at 10:30 AM.",
+    "referenceType": "interview",
+    "referenceId": 18
+}
+
+5. Unified dashboard:
+
+GET /api/placement-dashboard/mine
+
+It combines:
+- application statistics
+- drive application statistics
+- upcoming interviews
+- open placement drives
+- latest notifications
+
+6. Student UI:
+
+frontend/pages/student/placement-dashboard.html
+
+The dashboard provides:
+- application counters
+- shortlist count
+- interview count
+- selected count
+- open-drive count
+- recent notifications
+- notification read controls
+- upcoming interviews
+- open placement drives
+- overall placement progress
+
+IMPORTANT:
+This part provides the notification storage and APIs. It does not
+run a background scheduler yet. Automatic notifications can be
+added later through a scheduled job/worker that creates records
+when deadlines, interviews or application-status changes occur.
+
+The dashboard reads the existing Package 10 Parts 1-4 tables and
+does not duplicate application or interview records.
+
+Next:
+Package 10 Part 6 will add resume/profile document management,
+placement-readiness scoring and the admin placement analytics layer.

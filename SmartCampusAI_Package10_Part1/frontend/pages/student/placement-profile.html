@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Profile</title>
+<style>
+body{font-family:Arial;background:#f4f6f8;margin:0}
+main{max-width:850px;margin:auto;padding:24px}
+form{background:#fff;padding:20px;border-radius:10px;margin-bottom:20px}
+input,select,textarea,button{width:100%;box-sizing:border-box;padding:10px;margin:7px 0 15px}
+</style>
+</head>
+<body>
+<main>
+<h1>Placement Profile</h1>
+<form id="profileForm">
+<label>Career Goal</label><textarea id="careerGoal"></textarea>
+<label>Preferred Role</label><input id="preferredRole" placeholder="Software Developer">
+<label>Preferred Location</label><input id="preferredLocation" placeholder="Hyderabad">
+<label>LinkedIn URL</label><input id="linkedinUrl" type="url">
+<label>GitHub URL</label><input id="githubUrl" type="url">
+<label>Portfolio URL</label><input id="portfolioUrl" type="url">
+<label>Placement Status</label>
+<select id="placementStatus">
+<option>Not Started</option><option>Preparing</option><option>Eligible</option>
+<option>Applied</option><option>Interviewing</option><option>Selected</option>
+<option>Not Selected</option>
+</select>
+<button type="submit">Save Placement Profile</button>
+</form>
+<p id="status"></p>
+
+<h2>Skills</h2>
+<form id="skillForm">
+<input id="skillName" placeholder="Python" required>
+<select id="proficiency">
+<option>Beginner</option><option>Intermediate</option>
+<option>Advanced</option><option>Expert</option>
+</select>
+<button type="submit">Add Skill</button>
+</form>
+<section id="skills"></section>
+</main>
+<script src="../../assets/js/placement-profile.js"></script>
+</body>
+</html>

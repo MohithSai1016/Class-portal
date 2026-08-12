@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Final Placement Report</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:1000px;
+    margin:auto;
+    padding:24px;
+}
+.card{
+    background:#fff;
+    padding:18px;
+    border-radius:12px;
+    margin:12px 0;
+}
+button{
+    padding:10px 14px;
+}
+.item{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Final Placement Reports</h1>
+
+<section class="card">
+<button id="generate">
+Generate Current Report
+</button>
+<p id="message"></p>
+</section>
+
+<section class="card">
+<div id="reports">Loading...</div>
+</section>
+</main>
+
+<script>
+const token=
+    localStorage.getItem("token");
+
+function esc(value){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+async function load(){
+    const response=
+        await fetch(
+            "http://localhost:5000/api/final-placement-reports/",
+            {
+                headers:{
+                    Authorization:
+                        `Bearer ${token}`
+                }
+            }
+        );
+
+    const data=
+        await response.json();
+
+    if(!data.success){
+        throw new Error(
+            data.message
+        );
+    }
+
+    document.getElementById(
+        "reports"
+    ).innerHTML=
+        data.reports.length
+            ? data.reports.map(
+                r=>`
+                <article class="item">
+                    <strong>
+                        ${esc(r.report_name)}
+                    </strong>
+
+                    <p>
+                        Students:
+                        ${esc(r.total_students)}
+                    </p>
+
+                    <p>
+                        Applications:
+                        ${esc(r.total_applications)}
+                    </p>
+
+                    <p>
+                        Selected:
+                        ${esc(r.total_selected)}
+                    </p>
+
+                    <p>
+                        Joined:
+                        ${esc(r.total_joined)}
+                    </p>
+
+                    <p>
+                        Companies:
+                        ${esc(r.total_companies)}
+                    </p>
+
+                    <p>
+                        Average salary:
+                        ${esc(
+                            r.average_salary_lpa ||
+                            "N/A"
+                        )} LPA
+                    </p>
+
+                    <p>
+                        Highest salary:
+                        ${esc(
+                            r.highest_salary_lpa ||
+                            "N/A"
+                        )} LPA
+                    </p>
+
+                    <small>
+                        Generated:
+                        ${esc(r.generated_at)}
+                    </small>
+                </article>
+                `
+            ).join("")
+            : "<p>No reports generated.</p>";
+}
+
+document.getElementById(
+    "generate"
+).onclick=async()=>{
+    try{
+        const response=
+            await fetch(
+                "http://localhost:5000/api/final-placement-reports/generate",
+                {
+                    method:"POST",
+                    headers:{
+                        Authorization:
+                            `Bearer ${token}`,
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body:JSON.stringify({
+                        reportName:
+                            "Final Placement Report"
+                    })
+                }
+            );
+
+        const data=
+            await response.json();
+
+        document.getElementById(
+            "message"
+        ).textContent=
+            data.success
+                ? "Report generated."
+                : data.message;
+
+        if(data.success){
+            await load();
+        }
+    }catch(error){
+        document.getElementById(
+            "message"
+        ).textContent=
+            error.message;
+    }
+};
+
+load().catch(error=>{
+    document.getElementById(
+        "message"
+    ).textContent=
+        error.message;
+});
+</script>
+</body>
+</html>

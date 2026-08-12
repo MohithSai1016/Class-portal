@@ -1,0 +1,111 @@
+PACKAGE 10 - PART 8
+
+PLACEMENT OFFERS + JOINING STATUS + FINAL REPORTS
+
+1. Run:
+database/schema_part8.sql
+
+2. Add to backend/app.js:
+
+app.use(
+    "/api/placement-offers",
+    require("./routes/placementOfferRoutes")
+);
+
+app.use(
+    "/api/final-placement-reports",
+    require("./routes/finalPlacementReportRoutes")
+);
+
+app.use(
+    "/api/resume",
+    require("./routes/resumeRoutes")
+);
+
+3. Placement offers
+
+HOD/Admin:
+POST /api/placement-offers
+PATCH /api/placement-offers/:id
+GET /api/placement-offers/all
+
+Student:
+GET /api/placement-offers/mine
+
+Create body example:
+
+{
+    "driveApplicationId": 25,
+    "offerTitle": "Software Engineer Offer",
+    "offerDate": "2026-09-20",
+    "joiningDate": "2027-06-01",
+    "salaryLpa": 8.5,
+    "offerStatus": "Issued",
+    "joiningStatus": "Pending",
+    "notes": "Offer issued after final interview."
+}
+
+4. Final placement report
+
+Generate:
+POST /api/final-placement-reports/generate
+
+List:
+GET /api/final-placement-reports/
+
+The generated snapshot contains:
+- total students
+- total applications
+- selected students
+- joined students
+- companies
+- average salary
+- highest salary
+
+5. UI
+
+Student:
+frontend/pages/student/placement-offers.html
+
+HOD/Admin:
+frontend/pages/admin/placement-offers.html
+frontend/pages/admin/final-placement-report.html
+
+6. Important schema assumption
+
+The final report currently reads the existing:
+students
+placement_drive_applications
+placement_drives
+placement_companies
+placement_offers
+
+If your project uses a different student master-table name,
+change the `FROM students` query in:
+backend/models/FinalPlacementReportRepository.js
+
+7. Offer letters
+
+This part stores offer-letter metadata:
+- file name
+- file path
+
+The actual binary upload can reuse the secure resume upload
+pattern from Package 10 Part 7, with a dedicated offer-letter
+directory and stricter HOD/Admin permissions.
+
+8. This completes the core placement lifecycle:
+
+Drive
+→ Application
+→ Eligibility
+→ Interview
+→ Selection
+→ Offer
+→ Joining
+→ Final Placement Report
+
+Next:
+Package 10 Part 9 can add placement offer-letter upload,
+student acceptance workflow, joining confirmation, placement
+certificate generation, and final HOD dashboard integration.

@@ -1,0 +1,112 @@
+PACKAGE 10 - PART 4
+
+AUTOMATIC ELIGIBILITY + INTERVIEW TRACKING
+
+1. Run:
+database/schema_part4.sql
+
+2. Configure the existing student academic table.
+
+In .env:
+
+STUDENT_ACADEMIC_TABLE=students
+
+The table must contain:
+- user_id
+- cgpa
+- department
+- backlogs
+
+If your existing student table uses different column names,
+update backend/models/StudentAcademicRepository.js to match
+your project schema.
+
+3. Add to backend/app.js:
+
+app.use(
+    "/api/placement-eligibility",
+    require("./routes/placementEligibilityRoutes")
+);
+
+app.use(
+    "/api/placement-interviews",
+    require("./routes/placementInterviewRoutes")
+);
+
+4. Eligibility API:
+
+GET /api/placement-eligibility/mine/:driveId
+
+The server checks:
+- minimum CGPA
+- department
+- maximum allowed backlogs
+
+Example response:
+
+{
+    "success": true,
+    "eligible": true,
+    "reason": "Eligible",
+    "student": {
+        "cgpa": 8.2,
+        "department": "CSE",
+        "backlogs": 0
+    },
+    "criteria": {
+        "minimumCgpa": 7,
+        "departments": "CSE,CAI,IT",
+        "maximumBacklogs": 0
+    }
+}
+
+5. Interview APIs:
+
+GET /api/placement-interviews/mine
+GET /api/placement-interviews/mine/upcoming
+GET /api/placement-interviews/mine/:id
+
+Admin/HOD:
+POST /api/placement-interviews/admin
+
+Example:
+
+{
+    "driveApplicationId": 12,
+    "interviewRound": "Technical Round 1",
+    "interviewType": "Technical",
+    "scheduledAt": "2026-09-20 10:30:00",
+    "venue": "Placement Cell - Room 2",
+    "meetingUrl": "",
+    "interviewerName": "Placement Panel",
+    "interviewStatus": "Scheduled",
+    "notes": "Bring college ID."
+}
+
+6. Student UI:
+
+frontend/pages/student/placement-interviews.html
+
+This displays:
+- upcoming interviews
+- round
+- interview type
+- date/time
+- venue
+- interviewer
+- meeting link
+- status
+- notes
+
+SECURITY NOTE:
+The student eligibility endpoint reads only the authenticated
+student's academic record. Interview GET endpoints only return
+interviews associated with that authenticated student's
+placement applications.
+
+The admin interview creation endpoint is intentionally separated
+from the student endpoints.
+
+Next:
+Package 10 Part 5 will add placement notifications/reminders and
+a unified student placement dashboard.

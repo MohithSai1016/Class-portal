@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Offer Management</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:1100px;
+    margin:auto;
+    padding:24px;
+}
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    margin:12px 0;
+}
+.item{
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:12px;
+    margin:8px 0;
+}
+input,select,textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:9px;
+    margin:5px 0 10px;
+}
+button{
+    padding:10px 14px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Placement Offer Management</h1>
+
+<section class="card">
+<h2>Create Offer</h2>
+
+<form id="createForm">
+
+<label>Drive Application ID</label>
+<input id="applicationId"
+       type="number"
+       required>
+
+<label>Offer Title</label>
+<input id="offerTitle">
+
+<label>Offer Date</label>
+<input id="offerDate"
+       type="date">
+
+<label>Joining Date</label>
+<input id="joiningDate"
+       type="date">
+
+<label>Salary LPA</label>
+<input id="salary"
+       type="number"
+       step="0.01">
+
+<label>Offer Status</label>
+<select id="offerStatus">
+<option>Draft</option>
+<option>Issued</option>
+<option>Accepted</option>
+<option>Declined</option>
+<option>Withdrawn</option>
+</select>
+
+<label>Joining Status</label>
+<select id="joiningStatus">
+<option>Pending</option>
+<option>Joined</option>
+<option>Not Joined</option>
+<option>Deferred</option>
+</select>
+
+<label>Notes</label>
+<textarea id="notes"></textarea>
+
+<button>
+Create Offer
+</button>
+</form>
+</section>
+
+<section class="card">
+<h2>Existing Offers</h2>
+<div id="offers">Loading...</div>
+</section>
+
+<p id="message"></p>
+</main>
+
+<script>
+const token=
+    localStorage.getItem("token");
+
+function esc(value){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+async function load(){
+    const response=
+        await fetch(
+            "http://localhost:5000/api/placement-offers/all",
+            {
+                headers:{
+                    Authorization:
+                        `Bearer ${token}`
+                }
+            }
+        );
+
+    const data=
+        await response.json();
+
+    if(!data.success){
+        throw new Error(
+            data.message
+        );
+    }
+
+    document.getElementById(
+        "offers"
+    ).innerHTML=
+        data.offers.length
+            ? data.offers.map(
+                offer=>`
+                <article class="item">
+                    <strong>
+                        ${esc(
+                            offer.company_name
+                        )}
+                    </strong>
+
+                    <p>
+                        Student:
+                        ${esc(
+                            offer.student_user_id
+                        )}
+                    </p>
+
+                    <p>
+                        Role:
+                        ${esc(
+                            offer.role_title
+                        )}
+                    </p>
+
+                    <p>
+                        Offer:
+                        ${esc(
+                            offer.offer_status
+                        )}
+                    </p>
+
+                    <p>
+                        Joining:
+                        ${esc(
+                            offer.joining_status
+                        )}
+                    </p>
+
+                    <p>
+                        Salary:
+                        ${esc(
+                            offer.salary_lpa ||
+                            "N/A"
+                        )}
+                    </p>
+                </article>
+                `
+            ).join("")
+            : "<p>No offers.</p>";
+}
+
+document.getElementById(
+    "createForm"
+).onsubmit=async event=>{
+    event.preventDefault();
+
+    try{
+        const body={
+            driveApplicationId:
+                Number(
+                    document.getElementById(
+                        "applicationId"
+                    ).value
+                ),
+            offerTitle:
+                document.getElementById(
+                    "offerTitle"
+                ).value,
+            offerDate:
+                document.getElementById(
+                    "offerDate"
+                ).value || null,
+            joiningDate:
+                document.getElementById(
+                    "joiningDate"
+                ).value || null,
+            salaryLpa:
+                document.getElementById(
+                    "salary"
+                ).value || null,
+            offerStatus:
+                document.getElementById(
+                    "offerStatus"
+                ).value,
+            joiningStatus:
+                document.getElementById(
+                    "joiningStatus"
+                ).value,
+            notes:
+                document.getElementById(
+                    "notes"
+                ).value
+        };
+
+        const response=
+            await fetch(
+                "http://localhost:5000/api/placement-offers",
+                {
+                    method:"POST",
+                    headers:{
+                        Authorization:
+                            `Bearer ${token}`,
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body:
+                        JSON.stringify(body)
+                }
+            );
+
+        const data=
+            await response.json();
+
+        document.getElementById(
+            "message"
+        ).textContent=
+            data.success
+                ? "Offer created."
+                : data.message;
+
+        if(data.success){
+            event.target.reset();
+            await load();
+        }
+    }catch(error){
+        document.getElementById(
+            "message"
+        ).textContent=
+            error.message;
+    }
+};
+
+load().catch(error=>{
+    document.getElementById(
+        "message"
+    ).textContent=
+        error.message;
+});
+</script>
+</body>
+</html>

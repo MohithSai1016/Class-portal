@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Resume</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:700px;
+    margin:auto;
+    padding:24px;
+}
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+}
+button{
+    margin-top:15px;
+    padding:10px 16px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>My Resume</h1>
+
+<section class="card">
+<form id="resumeForm">
+<input
+    type="file"
+    id="resume"
+    accept=".pdf,.doc,.docx"
+    required>
+<br>
+<button type="submit">
+Upload Resume
+</button>
+</form>
+
+<br>
+
+<button id="download">
+Download My Resume
+</button>
+
+<p id="message"></p>
+</section>
+</main>
+
+<script>
+const token=localStorage.getItem("token");
+
+document.getElementById(
+    "resumeForm"
+).onsubmit=async event=>{
+    event.preventDefault();
+
+    const file=
+        document.getElementById(
+            "resume"
+        ).files[0];
+
+    if(!file) return;
+
+    const form=new FormData();
+    form.append("resume",file);
+
+    const response=
+        await fetch(
+            "http://localhost:5000/api/resume/mine",
+            {
+                method:"POST",
+                headers:{
+                    Authorization:
+                        `Bearer ${token}`
+                },
+                body:form
+            }
+        );
+
+    const data=
+        await response.json();
+
+    document.getElementById(
+        "message"
+    ).textContent=
+        data.message ||
+        "Upload complete.";
+};
+
+document.getElementById(
+    "download"
+).onclick=()=>{
+    window.open(
+        "http://localhost:5000/api/resume/mine",
+        "_blank"
+    );
+};
+</script>
+</body>
+</html>

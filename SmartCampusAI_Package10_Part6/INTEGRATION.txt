@@ -1,0 +1,99 @@
+PACKAGE 10 - PART 6
+
+PLACEMENT PROFILE + READINESS + ADMIN ANALYTICS
+
+1. Run:
+database/schema_part6.sql
+
+2. Add to backend/app.js:
+
+app.use(
+    "/api/student-placement-profile",
+    require("./routes/studentPlacementProfileRoutes")
+);
+
+app.use(
+    "/api/placement-analytics",
+    require("./routes/placementAnalyticsRoutes")
+);
+
+3. Configure:
+STUDENT_ACADEMIC_TABLE=students
+
+The existing academic table is expected to contain:
+- user_id
+- cgpa
+- department
+- backlogs
+
+4. Student profile APIs:
+
+GET /api/student-placement-profile/mine
+PUT /api/student-placement-profile/mine
+GET /api/student-placement-profile/mine/readiness
+
+5. Placement profile body:
+
+{
+    "resumeFileName":"resume.pdf",
+    "resumeFilePath":"/uploads/resumes/resume.pdf",
+    "linkedinUrl":"https://www.linkedin.com/in/example",
+    "githubUrl":"https://github.com/example",
+    "portfolioUrl":"https://example.com",
+    "skills":"Python, JavaScript, SQL",
+    "certifications":"AI Certificate, Cloud Certificate",
+    "projectsCount":3,
+    "internshipsCount":1
+}
+
+IMPORTANT:
+This part stores resume metadata/path. It does NOT implement
+binary file upload. Connect the resumeFilePath field to the
+project's existing secure upload service when that service is
+available.
+
+6. Readiness score:
+
+Maximum 100:
+Academic performance 30
+Skills 20
+Projects 20
+Internships 15
+Certifications 10
+Professional profile links 5
+
+A score of 70 or above is labelled "Placement Ready".
+
+This score is only a guidance indicator and must not be treated
+as an employment or hiring decision.
+
+7. Admin/HOD analytics:
+
+GET /api/placement-analytics/overview
+
+Returns:
+- total applications
+- selected count
+- shortlisted count
+- interview count
+- open-drive count
+- company statistics
+- department statistics
+- application-status statistics
+
+8. Admin UI:
+
+frontend/pages/admin/placement-analytics.html
+
+9. Student UI:
+
+frontend/pages/student/placement-profile.html
+
+SECURITY:
+Student profile endpoints only operate on req.user.id.
+Analytics endpoints require admin/hod authorization.
+
+Next:
+Package 10 Part 7 can add secure resume upload/download handling,
+placement-drive bulk import/export, and automated notification
+workers for deadlines/interviews.

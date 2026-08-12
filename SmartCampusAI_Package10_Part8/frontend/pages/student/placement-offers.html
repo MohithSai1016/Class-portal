@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Offers</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:900px;
+    margin:auto;
+    padding:24px;
+}
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    margin:12px 0;
+}
+.item{
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:14px;
+    margin:10px 0;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>My Placement Offers</h1>
+
+<section class="card">
+<div id="offers">Loading...</div>
+</section>
+
+<p id="message"></p>
+</main>
+
+<script>
+const token=
+    localStorage.getItem("token");
+
+function esc(value){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+async function load(){
+    try{
+        const response=
+            await fetch(
+                "http://localhost:5000/api/placement-offers/mine",
+                {
+                    headers:{
+                        Authorization:
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+        const data=
+            await response.json();
+
+        if(!data.success){
+            throw new Error(
+                data.message
+            );
+        }
+
+        document.getElementById(
+            "offers"
+        ).innerHTML=
+            data.offers.length
+                ? data.offers.map(
+                    offer=>`
+                    <article class="item">
+                        <h2>
+                            ${esc(
+                                offer.company_name
+                            )}
+                        </h2>
+
+                        <p>
+                            Role:
+                            ${esc(
+                                offer.role_title
+                            )}
+                        </p>
+
+                        <p>
+                            Offer:
+                            ${esc(
+                                offer.offer_status
+                            )}
+                        </p>
+
+                        <p>
+                            Joining:
+                            ${esc(
+                                offer.joining_status
+                            )}
+                        </p>
+
+                        <p>
+                            Salary:
+                            ${
+                                offer.salary_lpa
+                                    ? esc(
+                                        offer.salary_lpa
+                                    )+" LPA"
+                                    : "Not specified"
+                            }
+                        </p>
+
+                        <p>
+                            Joining date:
+                            ${esc(
+                                offer.joining_date ||
+                                "Not specified"
+                            )}
+                        </p>
+                    </article>
+                    `
+                ).join("")
+                : "<p>No placement offers yet.</p>";
+    }catch(error){
+        document.getElementById(
+            "message"
+        ).textContent=
+            error.message;
+    }
+}
+
+load();
+</script>
+</body>
+</html>

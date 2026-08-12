@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Dashboard</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+}
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:24px;
+}
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+}
+.card{
+    background:#fff;
+    padding:18px;
+    border-radius:12px;
+    margin:12px 0;
+}
+.stat{
+    text-align:center;
+}
+.stat h2{
+    margin:8px 0 0;
+}
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+    gap:12px;
+}
+.item{
+    border:1px solid #ddd;
+    padding:12px;
+    border-radius:8px;
+    margin:8px 0;
+}
+button{
+    padding:10px 14px;
+    cursor:pointer;
+}
+.small{
+    font-size:13px;
+}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Placement Dashboard</h1>
+
+<div id="message"></div>
+
+<section id="stats"
+         class="stats">
+    Loading...
+</section>
+
+<div class="grid">
+
+<section class="card">
+<h2>🔔 Notifications</h2>
+<button id="readAll">
+    Mark all as read
+</button>
+<div id="notifications">
+    Loading...
+</div>
+</section>
+
+<section class="card">
+<h2>📅 Upcoming Interviews</h2>
+<div id="interviews">
+    Loading...
+</div>
+</section>
+
+</div>
+
+<div class="grid">
+
+<section class="card">
+<h2>💼 Open Placement Drives</h2>
+<div id="drives">
+    Loading...
+</div>
+</section>
+
+<section class="card">
+<h2>📊 Placement Progress</h2>
+<div id="progress">
+    Loading...
+</div>
+</section>
+
+</div>
+
+</main>
+
+<script src="../../assets/js/placement-dashboard.js"></script>
+</body>
+</html>

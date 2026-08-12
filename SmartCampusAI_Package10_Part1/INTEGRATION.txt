@@ -1,0 +1,24 @@
+PACKAGE 10 - PART 1
+
+Package 10 begins the Placement & Career Management module.
+
+Run database/schema.sql.
+
+Add to backend/app.js:
+
+app.use("/api/placement-profile",require("./routes/placementProfileRoutes"));
+app.use("/api/placement-skills",require("./routes/placementSkillRoutes"));
+
+Included:
+- Student placement profile
+- Career goal
+- Preferred role/location
+- LinkedIn/GitHub/portfolio links
+- Placement status
+- Student skill management
+- Skill proficiency levels
+- Verification flag foundation
+- Student placement profile UI
+
+Later Package 10 parts will add applications, company drives,
+interviews, resume management, placement analytics and admin workflows.

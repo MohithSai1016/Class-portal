@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Profile</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:900px;
+    margin:auto;
+    padding:24px;
+}
+.card{
+    background:#fff;
+    padding:20px;
+    margin:12px 0;
+    border-radius:12px;
+}
+label{
+    display:block;
+    margin-top:12px;
+    font-weight:bold;
+}
+input,textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:10px;
+    margin-top:5px;
+}
+button{
+    margin-top:16px;
+    padding:11px 16px;
+    cursor:pointer;
+}
+.score{
+    font-size:30px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Placement Profile</h1>
+
+<section class="card">
+<form id="profileForm">
+
+<label>Resume file name</label>
+<input id="resumeFileName"
+       placeholder="resume.pdf">
+
+<label>Resume file path</label>
+<input id="resumeFilePath"
+       placeholder="/uploads/resumes/resume.pdf">
+
+<label>LinkedIn URL</label>
+<input id="linkedinUrl">
+
+<label>GitHub URL</label>
+<input id="githubUrl">
+
+<label>Portfolio URL</label>
+<input id="portfolioUrl">
+
+<label>Skills</label>
+<textarea id="skills"
+          placeholder="Python, JavaScript, SQL"></textarea>
+
+<label>Certifications</label>
+<textarea id="certifications"
+          placeholder="Certification 1, Certification 2"></textarea>
+
+<label>Projects count</label>
+<input id="projectsCount"
+       type="number"
+       min="0"
+       value="0">
+
+<label>Internships count</label>
+<input id="internshipsCount"
+       type="number"
+       min="0"
+       value="0">
+
+<button type="submit">
+Save Profile
+</button>
+
+</form>
+</section>
+
+<section class="card">
+<h2>Placement Readiness</h2>
+<button id="calculate">
+Calculate Readiness
+</button>
+
+<div id="readiness">
+Not calculated yet.
+</div>
+</section>
+
+<p id="message"></p>
+
+</main>
+
+<script src="../../assets/js/placement-profile.js"></script>
+</body>
+</html>

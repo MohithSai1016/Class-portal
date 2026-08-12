@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Applications</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+}
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 24px;
+}
+.card {
+    background: white;
+    padding: 18px;
+    margin: 12px 0;
+    border-radius: 10px;
+}
+.grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap: 12px;
+}
+input, select, textarea, button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 6px 0;
+}
+button {
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Placement Applications</h1>
+
+<section id="summary" class="grid">
+    Loading summary...
+</section>
+
+<section class="card">
+<h2>Add Application</h2>
+
+<form id="applicationForm">
+    <input id="companyName"
+           placeholder="Company name"
+           required>
+
+    <input id="roleTitle"
+           placeholder="Role title"
+           required>
+
+    <input id="applicationDate"
+           type="date"
+           required>
+
+    <select id="applicationStatus">
+        <option>Saved</option>
+        <option>Applied</option>
+        <option>Shortlisted</option>
+        <option>Interview</option>
+        <option>Selected</option>
+        <option>Rejected</option>
+        <option>Withdrawn</option>
+    </select>
+
+    <input id="jobUrl"
+           type="url"
+           placeholder="Job URL">
+
+    <textarea id="notes"
+              placeholder="Notes"></textarea>
+
+    <button type="submit">
+        Add Application
+    </button>
+</form>
+
+<p id="message"></p>
+</section>
+
+<section class="card">
+<h2>My Applications</h2>
+
+<div class="grid">
+    <input id="search"
+           placeholder="Search company or role">
+
+    <select id="filterStatus">
+        <option value="">All statuses</option>
+        <option>Saved</option>
+        <option>Applied</option>
+        <option>Shortlisted</option>
+        <option>Interview</option>
+        <option>Selected</option>
+        <option>Rejected</option>
+        <option>Withdrawn</option>
+    </select>
+
+    <button id="filterButton">
+        Filter
+    </button>
+</div>
+
+<div id="applications">
+    Loading applications...
+</div>
+</section>
+</main>
+
+<script src="../../assets/js/placement-applications.js"></script>
+</body>
+</html>

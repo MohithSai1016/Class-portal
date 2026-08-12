@@ -1,0 +1,64 @@
+PACKAGE 10 - PART 2
+
+This part adds student placement application tracking.
+
+The database table placement_applications was created in
+Package 10 Part 1.
+
+Add to backend/app.js:
+
+app.use(
+    "/api/placement-applications",
+    require("./routes/placementApplicationRoutes")
+);
+
+API:
+
+GET /api/placement-applications/mine
+    Optional:
+    ?search=google
+    ?status=Applied
+
+GET /api/placement-applications/mine/summary
+
+GET /api/placement-applications/mine/:id
+
+POST /api/placement-applications/mine
+
+Example body:
+
+{
+    "companyName": "Example Technologies",
+    "roleTitle": "Software Developer Intern",
+    "applicationDate": "2026-08-12",
+    "applicationStatus": "Applied",
+    "jobUrl": "https://example.com/jobs/123",
+    "notes": "Applied through campus placement portal."
+}
+
+PUT /api/placement-applications/mine/:id
+
+DELETE /api/placement-applications/mine/:id
+
+Supported application statuses:
+
+Saved
+Applied
+Shortlisted
+Interview
+Selected
+Rejected
+Withdrawn
+
+Student ownership is enforced through the authenticated user ID,
+so one student cannot access another student's applications.
+
+Frontend:
+
+frontend/pages/student/placement-applications.html
+
+The dashboard provides application statistics, search, filtering,
+creation and deletion.
+
+Next Package 10 parts will build the company/placement-drive side,
+interview/event tracking, admin placement management and analytics.

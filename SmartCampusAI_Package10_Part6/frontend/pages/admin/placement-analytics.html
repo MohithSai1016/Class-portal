@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Analytics</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:24px;
+}
+.cards{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    margin:12px 0;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Placement Analytics</h1>
+
+<section id="summary"
+         class="cards">
+Loading...
+</section>
+
+<section class="card">
+<h2>Company Statistics</h2>
+<div id="companies">Loading...</div>
+</section>
+
+<section class="card">
+<h2>Department Statistics</h2>
+<div id="departments">Loading...</div>
+</section>
+
+<section class="card">
+<h2>Application Status</h2>
+<div id="statuses">Loading...</div>
+</section>
+
+<p id="message"></p>
+
+</main>
+
+<script src="../../assets/js/placement-analytics.js"></script>
+</body>
+</html>

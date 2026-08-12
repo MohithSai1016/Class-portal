@@ -1,0 +1,92 @@
+PACKAGE 10 - PART 3
+
+COMPANY & PLACEMENT DRIVE MODULE
+
+Run:
+database/schema_part3.sql
+
+Add to backend/app.js:
+
+app.use(
+    "/api/placement-drives",
+    require("./routes/placementDriveRoutes")
+);
+
+app.use(
+    "/api/placement-companies",
+    require("./routes/placementCompanyRoutes")
+);
+
+STUDENT API:
+
+GET /api/placement-drives/open
+    Optional:
+    ?search=company
+
+GET /api/placement-drives/open/:id
+
+POST /api/placement-drives/:id/apply
+
+GET /api/placement-drives/mine/applications
+
+ADMIN/HOD API:
+
+GET /api/placement-companies/
+
+POST /api/placement-companies/
+
+POST /api/placement-drives/admin
+
+Example company:
+
+{
+    "companyName":"Example Technologies",
+    "industry":"Software",
+    "websiteUrl":"https://example.com",
+    "description":"Technology company",
+    "contactEmail":"hr@example.com"
+}
+
+Example drive:
+
+{
+    "companyId":1,
+    "driveTitle":"2026 Campus Hiring",
+    "roleTitle":"Software Developer",
+    "description":"Graduate software developer hiring.",
+    "eligibilityMinCgpa":7.0,
+    "eligibilityDepartments":"CSE,CAI,IT",
+    "eligibilityBacklogs":0,
+    "packageLpa":8.5,
+    "jobLocation":"Hyderabad",
+    "driveDate":"2026-09-20 10:00:00",
+    "applicationDeadline":"2026-09-15 23:59:59",
+    "driveStatus":"Open"
+}
+
+Drive statuses:
+Draft
+Open
+Closed
+Completed
+Cancelled
+
+Drive application statuses:
+Applied
+Shortlisted
+Interview
+Selected
+Rejected
+Withdrawn
+
+The database enforces one application per student per drive.
+
+Student UI:
+frontend/pages/student/placement-drives.html
+
+IMPORTANT:
+The current eligibility fields are stored with each drive.
+The next placement module parts can connect them to the actual
+student academic profile (CGPA, department and backlog count) so
+the system can automatically determine eligibility rather than
+only displaying the criteria.

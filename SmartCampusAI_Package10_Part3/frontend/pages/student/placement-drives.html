@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+<title>Smart Campus AI - Placement Drives</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+main{
+    max-width:1100px;
+    margin:auto;
+    padding:24px;
+}
+.toolbar{
+    display:grid;
+    grid-template-columns:
+        2fr 1fr;
+    gap:10px;
+}
+.drive{
+    background:#fff;
+    border-radius:10px;
+    padding:20px;
+    margin:14px 0;
+}
+input,button{
+    box-sizing:border-box;
+    padding:11px;
+}
+button{
+    cursor:pointer;
+}
+.meta{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap:8px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Placement Drives</h1>
+
+<div class="toolbar">
+    <input id="search"
+           placeholder="Search company, role or drive">
+
+    <button id="refresh">
+        Refresh
+    </button>
+</div>
+
+<p id="message"></p>
+
+<section id="drives">
+    Loading drives...
+</section>
+
+<h2>My Drive Applications</h2>
+<section id="myApplications">
+    Loading...
+</section>
+</main>
+
+<script src="../../assets/js/placement-drives.js"></script>
+</body>
+</html>
